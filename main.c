@@ -23,9 +23,8 @@ void jump(int *instruction, char *read){
 	}
 }
 
-/*
 void dest2(int *instruction, char *dest){
-	*instruction = *instruction & 0xFF8F;
+	*instruction = *instruction & 0xFFC7;
 	if(!(strcmp(dest, "M")))  	    *instruction = *instruction | 0b001000;
 	else if(!(strcmp(dest, "D")))   *instruction = *instruction | 0b010000;
 	else if(!(strcmp(dest, "MD")))  *instruction = *instruction | 0b011000;
@@ -35,37 +34,45 @@ void dest2(int *instruction, char *dest){
 	else if(!(strcmp(dest, "AMD"))) *instruction = *instruction | 0b111000;
 }
 
-void dest(int *instruction, char *dest){
-	for(i = 0; read[i] != '\0'; i++){
-		if(!(strncmp(read[i], "=", 1)){
-				
+void dest(int *instruction, char *read){
+	char dest[1000];
+	int i;
+
+	strcpy(dest, read);
+	for(i = 0; dest[i] != '\0'; i++){
+		if(!(strncmp(&dest[i], "=", 1))){
+			dest[i] = '\0';
+			dest2(instruction, dest);
+			break;	
 		}
-		break;
 	}
 }
-*/
 
 void restate(char *string){
-	int i;
-	char *aux;
+	int i, j;
+	char aux[1000];
 	for(i = 0; string[i] != '\0'; i++){
+		//Tira os Espaços
 		if(!(strncmp(&string[i], " ", 1))){
-			
+			for(j = i; string[j] != '\0'; j++){
+				string[j] = string[j + 1];
+			}
 			i--;
 		} 
-		/*if(!(strncmp(&string[i], "//", 2))){
+		//Tira os comentários
+		if(!(strncmp(&string[i], "//", 2))){
 			string[i] = '\0';
 			break;
-		}*/
+		}
 	}
 }
 
 int main(){
-	char *read = " D = D+1;JEQ";
-	int i, instruction = 0;
+	char read[1000] = "MD=D+1 //comentário";
+	int i, instruction = 0xFFFF;
 
-	restate(read);
-	printf("%s\n", read);
+	//restate(read);
 	//jump(&instruction, read);
-	//printf("%d\n", instruction);	
+	//dest(&instruction, read);
+	printf("%X\n", instruction);	
 }
