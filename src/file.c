@@ -26,7 +26,11 @@ int readFile(char *linha, int cont){
 int emptyLine(char *string){
 	int i;
 	for(i = 0; string[i] != '\0'; i++){
-		if(string[i] != ' ') return 0;
+		if(string[i] != ' '){
+			if(string[i] != '\n'){
+				return 0;		
+			}
+		} 
 	}
 	return 1;
 }

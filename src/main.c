@@ -9,29 +9,26 @@ int main(){
 
 	while(readFile(read, linha)){
 		linha++;
-		printf("Linha %d = %s", linha, read);
-			
-		/*if(emptyLine(read)){
+		
+		if(emptyLine(read)){
 			continue;
-		}
+		}			
+
 		restate(read);
 
-		comp(&instruction, read);
-		printf("%d\n", instruction);
-
-		
 		if(comp(&instruction, read)){
 			printf("Erro na linha %d: COMP '%s' inválido;\n", linha, read);
-			//recomeça while
+			continue;
 		}
 		if(dest(&instruction, read)){
 			printf("Erro na linha %d: DEST '%s' inválido;\n", linha, read);	
-			//recomeça while
+			continue;
 		}
 		else if(jump(&instruction, read)){
 			printf("Erro na linha %d: JUMP '%s' inválido;\n", linha, read);
-			//recomeça while
+			continue;
 		} 	         
+		printf("%X\n", instruction);
 		//writeFile(instruction);*/
 	}
 }
