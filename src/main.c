@@ -9,7 +9,7 @@ int main(){
 
 	while(readFile(read, linha)){
 		linha++;
-			//printf("Linha %d = %s", linha, read);
+		printf("Linha %d = %s", linha, read);
 			
 		/*if(emptyLine(read)){
 			continue;

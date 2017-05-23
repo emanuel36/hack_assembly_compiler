@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <string.h>
+
 int readFile(char *linha, int cont){
 	char caminho[] = "entrada";
 	int interno=0;
 	FILE *f;
 	f = fopen(caminho, "r");
-	if(f == NULL)
+	
+	if(f == NULL){
 		printf("Arquivo nao encontrado.");
-
-
-	else
-		while(interno<cont){
-			fgets(linha, sizeof(linha), f);
+	}
+	else{
+		while(interno < cont){
+			fgets(linha, 100, f);
 			interno++;
 		}
-		while((fgets(linha, sizeof(linha), f))!=NULL) {
-			printf("Linha %d: %s", cont, linha);
-			
+		while((fgets(linha, 100, f)) != NULL){
 			return 1;
 		}
+	}
 	fclose(f);
 	return 0;
 }
