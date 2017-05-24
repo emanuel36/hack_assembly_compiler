@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h> 
 
 int readFile(char *linha, int cont){
 	char caminho[] = "entrada";
@@ -21,6 +22,21 @@ int readFile(char *linha, int cont){
 	}
 	fclose(f);
 	return 0;
+}
+
+void writeFile(int instruction){
+	//system("rm -f app.bin");
+	char caminho[] = "app.bin";
+	FILE *f;
+	f = fopen(caminho, "a");
+
+	if(f == NULL){
+		printf("Arquivo nao encontrado.");
+	}
+	else{
+		fprintf(f, "%X\n", instruction);
+	}
+	fclose(f);
 }
 
 int emptyLine(char *string){
@@ -57,3 +73,12 @@ void restate(char *string){
 		}
 	}
 }
+
+/*
+int validateInstruction(char *read){
+	int i;
+	for(i = 0; read[i] != '/0'; i++){
+		if(read[i] == ';')
+	}
+}
+*/

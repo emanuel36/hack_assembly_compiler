@@ -16,6 +16,13 @@ int main(){
 
 		restate(read);
 
+		//Instruções tipo C
+		/*
+		if(validateInstruction(read)){
+			printf("Erro na linha %d instrução inválida!\n", linha);
+		}
+		*/
+
 		if(comp(&instruction, read)){
 			printf("Erro na linha %d: COMP '%s' inválido;\n", linha, read);
 			continue;
@@ -28,7 +35,6 @@ int main(){
 			printf("Erro na linha %d: JUMP '%s' inválido;\n", linha, read);
 			continue;
 		} 	         
-		printf("%X\n", instruction);
-		//writeFile(instruction);*/
+		writeFile(instruction);
 	}
 }

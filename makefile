@@ -19,4 +19,4 @@ folder:
 	mkdir -p obj APP
 
 clean:
-	rm -rf APP obj
+	rm -rf APP obj app.bin
