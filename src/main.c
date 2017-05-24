@@ -5,7 +5,8 @@
 int main(){
 	int linha = 0;
 	char read[100];
-	int i, instruction = 0xFFFF;
+	int i, erro = 0, instruction = 0xFFFF;
+	remove("app.bin");
 
 	while(readFile(read, linha)){
 		linha++;
@@ -16,25 +17,37 @@ int main(){
 
 		restate(read);
 
-		//Instruções tipo C
-		/*
 		if(validateInstruction(read)){
-			printf("Erro na linha %d instrução inválida!\n", linha);
+			printf("Line %d  error: invalid instruction!\n", linha);
+			erro = 1;
+			continue;
 		}
-		*/
 
-		if(comp(&instruction, read)){
-			printf("Erro na linha %d: COMP '%s' inválido;\n", linha, read);
-			continue;
-		}
-		if(dest(&instruction, read)){
-			printf("Erro na linha %d: DEST '%s' inválido;\n", linha, read);	
-			continue;
-		}
-		else if(jump(&instruction, read)){
-			printf("Erro na linha %d: JUMP '%s' inválido;\n", linha, read);
-			continue;
+		if(read[i] == '@'){
+			//Instrunções tipo A
+		}else{
+			//Instruções tipo C
+			if(comp(&instruction, read)){
+				printf("Line %d: error: invalid '%s' COMP;\n", linha, read);
+				erro = 1;
+				continue;
+			}
+			if(dest(&instruction, read)){
+				printf("Line %d: error: invalid '%s' DEST;\n", linha, read);	
+				erro = 1;
+				continue;
+			}
+			else if(jump(&instruction, read)){
+				printf("Line %d: error: invalid '%s' JUMP;\n", linha, read);
+				erro = 1;
+				continue;
+			}
 		} 	         
 		writeFile(instruction);
+	}
+	if(!erro){
+		printf("\nCompiled successfully!\n\n");
+	}else{
+		remove("app.bin");		
 	}
 }

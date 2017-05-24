@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h> 
+#include <ctype.h>
 
 int readFile(char *linha, int cont){
 	char caminho[] = "entrada";
@@ -25,8 +25,8 @@ int readFile(char *linha, int cont){
 }
 
 void writeFile(int instruction){
-	//system("rm -f app.bin");
 	char caminho[] = "app.bin";
+	int i;
 	FILE *f;
 	f = fopen(caminho, "a");
 
@@ -34,7 +34,11 @@ void writeFile(int instruction){
 		printf("Arquivo nao encontrado.");
 	}
 	else{
-		fprintf(f, "%X\n", instruction);
+		for(i = 15; i > 0; i--){
+			if(instruction & (1 << i))	fprintf(f, "1");
+			else						fprintf(f, "0");
+		}
+		fprintf(f, "\n");
 	}
 	fclose(f);
 }
@@ -54,6 +58,7 @@ int emptyLine(char *string){
 void restate(char *string){
 	int i, j;
 	char aux[100];
+
 	for(i = 0; string[i] != '\0'; i++){
 		//Tira os Espaços
 		if(!(strncmp(&string[i], " ", 1))){
@@ -71,14 +76,55 @@ void restate(char *string){
 			string[i] = '\0';
 			break;
 		}
+		//converte letra para maiuscula
+		string[i] = toupper(string[i]);		
 	}
 }
 
-/*
+int validateInstructionA(char *read){
+	int i;
+	if(!(read[1] >= '0' && read[1] <= '9') && (read[1] != '(')){
+		printf("IF 1");
+		return 1;
+	}
+	if(read[1] == '('){
+		for(i = 0; read[i] != '\0'; i++){
+			if(read[i] == ')'){
+				return 0;
+			}
+		}
+		return 1;
+	}
+	else{
+		for(i = 2; read[i] != '\0'; i++){
+			if(!(read[i] >= '0' && read[i] <= '9')){
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+
+int validateInstructionB(char *read){
+	int i;
+	for(i = 0; read[i] != '\0'; i++){
+		if(read[i] == '='){
+			while(read[i] != '\0'){
+				i++;
+				if(read[i] == ';'){
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+
 int validateInstruction(char *read){
 	int i;
-	for(i = 0; read[i] != '/0'; i++){
-		if(read[i] == ';')
+	if(read[0] == '@'){
+		return (validateInstructionA(read));
+	}else{
+		return (validateInstructionB(read));
 	}
 }
-*/

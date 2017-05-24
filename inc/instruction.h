@@ -6,6 +6,9 @@ int dest2(int *instruction, char *dest);
 int dest(int *instruction, char *read);
 int comp2(int *instruction, char *comp);
 int comp(int *instruction, char *read);
+void validateInstructionA(char *read);
+void validateInstructionB(char *read);
+
 
 #define ZERA_JUMP 0xFFF8
 #define JGT 	  0b001
