@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "instruction.h"
 
 int jump2(int *instruction, char *jump){
@@ -233,6 +234,16 @@ int comp(int *instruction, char *read){
 	}
 	if(comp2(instruction, comp)){
 		strcpy(read, comp);
+		return 1;
+	}
+}
+
+int value(char *read, int *instruction){
+	if(atoi(&read[1]) <= 32767){
+		*instruction = 0;
+		*instruction = atoi(&read[1]);
+		return 0;
+	}else{
 		return 1;
 	}
 }

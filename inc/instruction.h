@@ -8,7 +8,7 @@ int comp2(int *instruction, char *comp);
 int comp(int *instruction, char *read);
 void validateInstructionA(char *read);
 void validateInstructionB(char *read);
-
+int value(char *read, int *instruction);
 
 #define ZERA_JUMP 0xFFF8
 #define JGT 	  0b001

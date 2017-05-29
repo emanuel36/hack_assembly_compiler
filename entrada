@@ -1,8 +1,12 @@
 m-1;jgt //COMENTARIO SAKJDBSDK
-
-m=d+1 //COMENTARIO SdsakljfDK
-!a;jmp
-
-asd;ghgff
-kjb
-kjlb;jgt
+@32767
+(LABEL)
+m=d+1 //COMENTARIO Sdsa255DK
+m=m-d
+!a;jgt
+(LOOP)
+@assisgay
+m=m-d
+@emanuelviado
+@(LOOP)
+(END)

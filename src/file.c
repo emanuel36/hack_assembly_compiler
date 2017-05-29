@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
-int readFile(char *linha, int cont){
+int readIn(char *linha, int cont){
 	char caminho[] = "entrada";
 	int interno=0;
 	FILE *f;
@@ -24,7 +25,7 @@ int readFile(char *linha, int cont){
 	return 0;
 }
 
-void writeFile(int instruction){
+void writeOut(int instruction){
 	char caminho[] = "app.bin";
 	int i;
 	FILE *f;
@@ -34,7 +35,7 @@ void writeFile(int instruction){
 		printf("Arquivo nao encontrado.");
 	}
 	else{
-		for(i = 15; i > 0; i--){
+		for(i = 15; i >= 0; i--){
 			if(instruction & (1 << i))	fprintf(f, "1");
 			else						fprintf(f, "0");
 		}
@@ -43,6 +44,62 @@ void writeFile(int instruction){
 	fclose(f);
 }
 
+void writeOut2(char *conteudo, int linha){
+	char caminho[] = "simbolos";
+	FILE *f;
+	f = fopen(caminho, "a");
+
+		if(f == NULL) printf("Arquivo nao encontrado.");
+
+		else{
+				fprintf(f, "%s=%d\n", conteudo, linha);
+			}
+	fclose(f);
+}
+
+void manualWrite(char *str){
+	char caminho[] = "simbolos";
+	FILE *f;
+	int i = 0;
+	f = fopen(caminho, "a");
+
+	if(f == NULL) printf("Arquivo nao encontrado.");
+
+	else
+		for(i=0;i<=15;i++){
+			fprintf(f, "R%d=%d\n", i, i);
+		}
+	fclose(f);	
+}
+int cmpStr(char *str){
+	char caminho[] = "simbolos";
+	char nome[500];
+	int valor=0;
+	int tamanho=0;
+	int i;
+	FILE *f;
+	f = fopen(caminho, "r");
+
+	if(f == NULL) printf("Arquivo nao encontrado.");
+
+	else
+		while((fgets(nome, sizeof(nome), f))!=NULL){
+			tamanho=strlen(str);
+
+			if(!(strncmp(nome, str, tamanho))){
+				
+				for(i=0; nome[i]!='\0'; i++){
+					if(nome[i]=='='){
+						return atoi(&nome[i + 1]);
+					}
+				}
+
+			}
+		}
+
+	fclose(f);
+	return 0;
+}
 int emptyLine(char *string){
 	int i;
 	for(i = 0; string[i] != '\0'; i++){
@@ -84,7 +141,7 @@ void restate(char *string){
 int validateInstructionA(char *read){
 	int i;
 	if(!(read[1] >= '0' && read[1] <= '9') && (read[1] != '(')){
-		printf("IF 1");
+		
 		return 1;
 	}
 	if(read[1] == '('){
