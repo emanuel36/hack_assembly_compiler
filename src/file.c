@@ -48,12 +48,12 @@ void writeOut2(char *conteudo, int linha){
 	char caminho[] = "simbolos";
 	FILE *f;
 	f = fopen(caminho, "a");
-
-		if(f == NULL) printf("Arquivo nao encontrado.");
-
-		else{
-				fprintf(f, "%s=%d\n", conteudo, linha);
-			}
+	if(f == NULL){
+		printf("Arquivo nao encontrado.");	
+	} 
+	else{
+		fprintf(f, "%s=%d\n", conteudo, linha);
+	}
 	fclose(f);
 }
 

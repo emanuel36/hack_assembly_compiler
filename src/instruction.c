@@ -240,7 +240,6 @@ int comp(int *instruction, char *read){
 
 int value(char *read, int *instruction){
 	if(atoi(&read[1]) <= 32767){
-		*instruction = 0;
 		*instruction = atoi(&read[1]);
 		return 0;
 	}else{

@@ -1,12 +1,12 @@
-m-1;jgt //COMENTARIO SAKJDBSDK
-@32767
+m-1;jgt //COMENTARIO 1
+@3277
 (LABEL)
-m=d+1 //COMENTARIO Sdsa255DK
+m=d+1 //COMENTARIO 2
 m=m-d
 !a;jgt
 (LOOP)
-@assisgay
+@variavel1
 m=m-d
-@emanuelviado
+@variavel2
 @(LOOP)
 (END)

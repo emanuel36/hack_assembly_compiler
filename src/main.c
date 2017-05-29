@@ -5,7 +5,7 @@
 int main(){
 	int linha = 0, cont = 0, tamanho = 0, cont2 = 16;
 	char read[100];
-	int erro = 0, instruction = 0xFFFF;
+	int erro = 0, instruction;
 	remove("app.bin");
 	remove("simbolos");
 	manualWrite(read);
@@ -25,7 +25,6 @@ int main(){
 			erro = 1;
 			continue;
 		}*/
-	
 		if(read[0] == '@' || read[0] == '('){
 			//Instrunções tipo A
 			if(read[0] == '('){
@@ -38,19 +37,19 @@ int main(){
 				//procura no arquivo o numero da label e escreve seu numero correspondente
 				instruction = cmpStr(&read[1]);
 			}
-			else if(read[1] <= '0' & read[1] <= '9'){
+			else if(read[1] >= '0' & read[1] <= '9'){
 				value(read, &instruction);
 			}
 			else{
 				//escreve no arquivo uma nova variavel, contando a partir do endereço 16
-				if(read[1] <= '0' || read[1] >= '9'){
-					writeOut2(&read[1], cont2);
-					cont2++;
-				}
+				writeOut2(&read[1], cont2);
+				instruction = cont2;
+				cont2++;	
 			}	
 		}
 		else{
 			//Instruções tipo C
+			instruction = 0xFFFF;
 			if(comp(&instruction, read)){
 				printf("Line %d: error: invalid '%s' COMP!\n", linha, read);
 				erro = 1;
@@ -67,6 +66,7 @@ int main(){
 				continue;
 			}
 		}	         
+		//printf("%s - %d\n", read, instruction);
 		writeOut(instruction);
 	}
 	if(!erro){
