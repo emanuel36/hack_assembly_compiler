@@ -71,6 +71,7 @@ void manualWrite(char *str){
 		}
 	fclose(f);	
 }
+
 int cmpStr(char *str){
 	char caminho[] = "simbolos";
 	char nome[500];
@@ -140,10 +141,6 @@ void restate(char *string){
 
 int validateInstructionA(char *read){
 	int i;
-	if(!(read[1] >= '0' && read[1] <= '9') && (read[1] != '(')){
-		
-		return 1;
-	}
 	if(read[1] == '('){
 		for(i = 0; read[i] != '\0'; i++){
 			if(read[i] == ')'){
@@ -152,7 +149,7 @@ int validateInstructionA(char *read){
 		}
 		return 1;
 	}
-	else{
+	if(read[1] >= '0' && read[1] <= '9'){
 		for(i = 2; read[i] != '\0'; i++){
 			if(!(read[i] >= '0' && read[i] <= '9')){
 				return 1;

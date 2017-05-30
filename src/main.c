@@ -20,11 +20,11 @@ int main(){
 
 		restate(read);
 
-		/*if(validateInstruction(read)){
+		if(validateInstruction(read)){
 			printf("Line %d  error: invalid instruction!\n", linha);
 			erro = 1;
 			continue;
-		}*/
+		}
 		if(read[0] == '@' || read[0] == '('){
 			//Instrunções tipo A
 			if(read[0] == '('){
@@ -66,7 +66,6 @@ int main(){
 				continue;
 			}
 		}	         
-		//printf("%s - %d\n", read, instruction);
 		writeOut(instruction);
 	}
 	if(!erro){
