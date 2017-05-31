@@ -3,7 +3,7 @@
 #include "file.h"
 
 int main(){
-	int linha = 0, cont = 0, tamanho = 0, cont2 = 16;
+	int linha = 0, cont = 0, tamanho = 0, cont2 = 16, aux = 0;
 	char read[100];
 	int erro = 0, instruction;
 	remove("app.bin");
@@ -42,9 +42,13 @@ int main(){
 			}
 			else{
 				//escreve no arquivo uma nova variavel, contando a partir do endereço 16
-				writeOut2(&read[1], cont2);
-				instruction = cont2;
-				cont2++;	
+				aux = cmpStr(&read[1]);
+				if(aux==-1){
+					writeOut2(&read[1], cont2);
+					instruction = cont2;
+					cont2++;	
+				}
+				else instruction = aux;
 			}	
 		}
 		else{

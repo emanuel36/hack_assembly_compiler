@@ -124,6 +124,13 @@ void restate(char *string){
 				string[j] = string[j + 1];
 			}
 			i--;
+		}
+		//Tira os Espaços
+		if(!(strncmp(&string[i], "	", 1))){
+			for(j = i; string[j] != '\0'; j++){
+				string[j] = string[j + 1];
+			}
+			i--;
 		} 
 		//Tira os comentários
 		if(!(strncmp(&string[i], "//", 2))){

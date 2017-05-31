@@ -1,12 +1,12 @@
-m-1;jgt //COMENTARIO 1
-@3277
-(LABEL)
-m=d+1 //COMENTARIO 2
-m=m-d
-!a;jgt
-(LOOP)
-@variavel1
-m=m-d
-@variavel2
-@(LOOP)
-(END)
+m-1;jgt		//COMP;JUMP
+@3277		//@VALUE
+(LABEL)		//LABEL
+m=d+1		//DEST;COMP
+@r6			//@ADRESS
+!a;jgt		//COMP;JUMP
+(LOOP)		//LABEL
+@variavel1	//@VARIABLE
+m=m-d		//DEST;COMP
+@variavel2	//@VARIABLE
+@(LOOP)		//JUMP TO LABEL
+(END)		//LABEL
